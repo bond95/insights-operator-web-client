@@ -12,11 +12,11 @@ install:
 jobs:
   include:
   - stage: Lint
-    script: npm run lint
+    script: yarn lint
   - stage: Test
-    script: npm run test && npx codecov
+    script: yarn test && npx codecov
   - stage: Deploy
-    script: npm run deploy && curl -sSL https://raw.githubusercontent.com/RedHatInsights/insights-frontend-builder-common/master/src/bootstrap.sh | bash -s
+    script: yarn deploy && curl -sSL https://raw.githubusercontent.com/RedHatInsights/insights-frontend-builder-common/master/src/bootstrap.sh | bash -s
 env:
   global:
   - REPO="git@github.com:RedHatInsights/insights-operator-web-client"
