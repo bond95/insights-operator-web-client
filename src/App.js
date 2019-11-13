@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Routes } from './Routes';
@@ -7,28 +7,28 @@ import './App.scss';
 
 class App extends Component {
 
-    componentDidMount () {
-        insights.chrome.init();
-        // TODO change this to your appname
-        // TODO should the sample app webpack just rewrite this automatically?
-        insights.chrome.identifyApp('insights');
+  componentDidMount () {
+    insights.chrome.init();
+    // TODO change this to your appname
+    // TODO should the sample app webpack just rewrite this automatically?
+    insights.chrome.identifyApp('insights-operator');
 
-        this.appNav = insights.chrome.on('APP_NAVIGATION', event => this.props.history.push(`/${event.navId}`));
-    }
+    this.appNav = insights.chrome.on('APP_NAVIGATION', event => this.props.history.push(`/${event.navId}`));
+  }
 
-    componentWillUnmount () {
-        this.appNav();
-    }
+  componentWillUnmount () {
+    this.appNav();
+  }
 
-    render () {
-        return (
-            <Routes childProps={ this.props } />
-        );
-    }
+  render () {
+    return (
+      <Routes childProps={this.props} />
+    );
+  }
 }
 
 App.propTypes = {
-    history: PropTypes.object
+  history: PropTypes.object,
 };
 
 /**
