@@ -1,7 +1,7 @@
 import { Route, Switch, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import React from 'react';
-import asyncComponent from './Utilities/asyncComponent';
+import asyncComponent from './utils/asyncComponent';
 import some from 'lodash/some';
 
 /**
@@ -18,29 +18,23 @@ import some from 'lodash/some';
  *         see the difference with DashboardMap and InventoryDeployments.
  *
  */
-const SamplePage = asyncComponent(() => import(/* webpackChunkName: "SamplePage" */ './SmartComponents/SamplePage/SamplePage'));
-const Rules = asyncComponent(() => import(/* webpackChunkName: "Rules" */ './PresentationalComponents/Rules/ListRules'));
+const ClustersPage = asyncComponent(() => import(/* webpackChunkName: "ClustersPage" */ './components/Clusters'));
 const paths = {
-    samplepage: '/samplepage',
-    rules: '/rules'
-};
-
-type Props = {
-    childProps: any
+  clusters: '/clusters',
 };
 
 const InsightsRoute = ({ component: Component, rootClass, ...rest }) => {
-    const root = document.getElementById('root');
-    root.removeAttribute('class');
-    root.classList.add(`page__${rootClass}`, 'pf-c-page__main');
-    root.setAttribute('role', 'main');
+  const root = document.getElementById('root');
+  root.removeAttribute('class');
+  root.classList.add(`page__${rootClass}`, 'pf-c-page__main');
+  root.setAttribute('role', 'main');
 
-    return (<Route { ...rest } component={ Component } />);
+  return (<Route {...rest} component={Component} />);
 };
 
 InsightsRoute.propTypes = {
-    component: PropTypes.func,
-    rootClass: PropTypes.string
+  component: PropTypes.func,
+  rootClass: PropTypes.string,
 };
 
 /**
@@ -51,16 +45,21 @@ InsightsRoute.propTypes = {
  *      path - https://prod.foo.redhat.com:1337/insights/advisor/rules
  *      component - component to be rendered when a route has been chosen.
  */
-export const Routes = (props: Props) => {
-    const path = props.childProps.location.pathname;
+const Routes = (props) => {
+  const path = props.childProps.location.pathname;
 
-    return (
-        <Switch>
-            <InsightsRoute path={ paths.samplepage } component={ SamplePage } rootClass='samplepage'/>
-            <InsightsRoute path={ paths.rules } component={ Rules } rootClass='rules'/>
+  return (
+    <Switch>
+      <InsightsRoute path={paths.clusters} component={ClustersPage} rootClass='clusters'/>
 
-            { /* Finally, catch all unmatched routes */ }
-            <Route render={ () => some(paths, p => p === path) ? null : (<Redirect to={ paths.samplepage }/>) }/>
-        </Switch>
-    );
+      {/* Finally, catch all unmatched routes */}
+      <Route render={() => some(paths, p => p === path) ? null : (<Redirect to={paths.clusters}/>)}/>
+    </Switch>
+  );
 };
+
+Routes.propTypes = {
+  childProps: PropTypes.object.isRequired,
+};
+
+export { Routes };
