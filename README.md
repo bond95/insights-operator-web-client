@@ -34,11 +34,11 @@ Container that provides ESI and routing tools.
     bash scripts/update.sh
     ```
 
-### Yarn
+### NPM
 
-`insights-operator-web-ui` using `yarn` instead of `npm`. So for install all modules is enough to do in project folder:
+For install all modules is enough to do in project folder:
 ```sh
-yarn
+npm install
 ```
 
 ### insights-operator-controller
@@ -59,7 +59,7 @@ SPANDX_CONFIG=path/to/insights-frontend-starter-app/config/spandx.config.js sh p
 
 3. Starting WebUI:
 ```sh
-yarn start
+npm run start
 ```
 
 Application can be found in `https://ci.foo.redhat.com:1337/insights/insights-operator` or `https://ci.foo.redhat.com:1337/apps/insights-operator`. If you are on Firefox, then first head to `https://sso.qa.redhat.com/` and accept the self-signed certificate.
