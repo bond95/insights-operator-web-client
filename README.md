@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/RedHatInsights/insights-operator-web-client.svg?branch=master)](https://travis-ci.org/RedHatInsights/insights-operator-web-client)
+
 # insights-operator-web-ui
 
 Web UI for insights operator instrumentation service
