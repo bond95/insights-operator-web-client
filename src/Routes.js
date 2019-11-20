@@ -19,8 +19,10 @@ import some from 'lodash/some';
  *
  */
 const ClustersPage = asyncComponent(() => import(/* webpackChunkName: "ClustersPage" */ './components/Clusters'));
+const TriggersPage = asyncComponent(() => import(/* webpackChunkName: "TriggersPage" */ './components/Triggers'));
 const paths = {
   clusters: '/clusters',
+  triggers: '/triggers',
 };
 
 const InsightsRoute = ({ component: Component, rootClass, ...rest }) => {
@@ -51,6 +53,7 @@ const Routes = (props) => {
   return (
     <Switch>
       <InsightsRoute path={paths.clusters} component={ClustersPage} rootClass='clusters'/>
+      <InsightsRoute path={paths.triggers} component={TriggersPage} rootClass='triggers'/>
 
       {/* Finally, catch all unmatched routes */}
       <Route render={() => some(paths, p => p === path) ? null : (<Redirect to={paths.clusters}/>)}/>

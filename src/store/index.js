@@ -1,7 +1,7 @@
 import ReducerRegistry from '@redhat-cloud-services/frontend-components-utilities/files/ReducerRegistry';
 import promiseMiddleware from 'redux-promise-middleware';
 import thunk from 'redux-thunk';
-import { clusters, config, modals } from '_/reducers';
+import { clusters, config, modals, triggers } from '_/reducers';
 import { initData } from '_/actions';
 
 let registry;
@@ -23,6 +23,7 @@ export function init (...middleware) {
     clusters,
     config,
     modals,
+    triggers,
   });
 
   registry.getStore().dispatch(initData());

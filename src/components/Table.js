@@ -16,7 +16,11 @@ class Table extends React.Component {
       rows: props.rows.map(row => {
         const rowArr = [];
         for (let column of props.columns) {
-          rowArr.push(row[column.mapper]);
+          if (typeof column.mapper === 'string') {
+            rowArr.push(row[column.mapper]);
+          } else {
+            rowArr.push(column.mapper(row));
+          }
         }
 
         return rowArr;
@@ -50,7 +54,12 @@ class Table extends React.Component {
       rows: Table.sortRows(props.rows.map(row => {
         const rowArr = [];
         for (let column of props.columns) {
-          rowArr.push(row[column.mapper]);
+          if (typeof column.mapper === 'string') {
+            rowArr.push(row[column.mapper]);
+          } else {
+            window.console.log('work');
+            rowArr.push({ title: column.mapper(row) });
+          }
         }
 
         return rowArr;
@@ -74,7 +83,7 @@ class Table extends React.Component {
 Table.propTypes = {
   columns: PropTypes.array.isRequired,
   rows: PropTypes.array.isRequired,
-  actions: PropTypes.array.isRequired,
+  actions: PropTypes.array,
   label: PropTypes.string.isRequired,
 };
 
