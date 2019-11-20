@@ -60,9 +60,10 @@ class Table extends React.Component {
 
   render() {
     const { columns, rows, sortBy } = this.state;
+    const { actions } = this.props;
 
     return (
-      <PatternflyTable aria-label={this.props.label} sortBy={sortBy} onSort={this.onSort} cells={columns} rows={rows}>
+      <PatternflyTable actions={actions} aria-label={this.props.label} sortBy={sortBy} onSort={this.onSort} cells={columns} rows={rows}>
         <TableHeader />
         <TableBody />
       </PatternflyTable>
@@ -73,6 +74,7 @@ class Table extends React.Component {
 Table.propTypes = {
   columns: PropTypes.array.isRequired,
   rows: PropTypes.array.isRequired,
+  actions: PropTypes.array.isRequired,
   label: PropTypes.string.isRequired,
 };
 

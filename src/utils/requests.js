@@ -1,9 +1,20 @@
 import config from '_/config.json';
 
-export const sendRequest = async (path) => {
+export const sendRequest = async (path, method = 'GET') => {
   const response = await fetch(
-    `${config.controllerURL}${path}`
+    `${config.controllerURL}${path}`,
+    {
+      method,
+    }
   );
-  const responseJson = await response.json();
-  return responseJson;
+  try {
+    const responseJson = await response.json();
+    return responseJson;
+  } catch (e) {
+    if (response.ok) {
+      return {};
+    }
+
+    window.console.error(e);
+  }
 };
